@@ -1,0 +1,372 @@
+%mode=ascii;
+
+designsize:=10;
+mode_setup;
+%openit;
+
+font_family "ASCII SPECIAL";
+coding_scheme "SPECIAL GRAPHIC FONT";
+
+def clear =
+  clearx;
+  currentpicture:=nullpicture;
+enddef;
+def clearx =
+  numeric x[],y[],x[]l,y[]l,x[]r,y[]r,dx[],dy[],pw;
+enddef;
+
+def drawpix expr p =
+ addto pix doublepath p.t_ withpen currentpen enddef;
+def curve(suffix $,$$,$$$) =
+  fill z$l
+   if known dz$: {dz$} fi
+  .. z$$l{if known dz$$: dz$$ else: z$$$l-z$l fi}
+  .. z$$$l
+   if known dz$$$: {dz$$$} fi
+  & z$$$l..z$$$r
+  & z$$$r
+   if known dz$$$: {-dz$$$} fi
+  .. z$$r{if known dz$$: -dz$$ else: z$r-z$$$r fi}
+  .. z$r
+   if known dz$: {-dz$} fi
+  & z$r..z$l & cycle;
+enddef;
+
+vardef setpos@#(expr a,b) =
+  z@#=.5[z@#l,z@#r] enddef;
+
+def setwidth (expr x) =
+  chardx:=x;
+  numeric w; w=chardx;
+  if proofing>1:
+  for n:=0 step 2bs until chardx-1:
+  proofrule((n,-ydepth),(n,hheight)); endfor
+  proofrule((chardx,-ydepth),(chardx,hheight));
+  proofrule((0,-ydepth),(chardx,-ydepth));
+  proofrule((0,0),(chardx,0));
+  proofrule((0,xheight),(chardx,xheight));
+  proofrule((0,capheight),(chardx,capheight));
+  proofrule((0,hheight),(chardx,hheight));
+  fi
+enddef;
+
+%def labelpos(text t) =
+%  if proofing>1:
+%  forsuffixes $$=l,,r: forsuffixes $=t:
+%    makelabel(str $.$$, z$.$$); endfor endfor fi enddef;
+
+def mask(expr mx,my) =
+  cullit;
+  pix:=nullpicture;
+  unfill (0,0)..(round(mx+1)*pt,round(my+1)*pt)..cycle;
+  for r=1 step 1 until mx*pt/2: addto pix also PIX shifted (2*r*sqsize,0);
+    endfor
+  cull pix including (1,9);
+  for i:=0 step pxsize until my*pt:
+    addto currentpicture also pix shifted(0,i);
+  endfor
+  picture pix;
+enddef;
+
+  show designsize; 
+  numeric s,pw,char_w,hheight,ydepth,bss,bs,f,us,uus,usx,uusx,dd;
+  180f = designsize; 
+  hheight=140f ; ydepth=40f; 
+  bss = 140f/17.3;
+  bs = bss*pt;
+  10us = designsize;
+  uus = us*pt;
+  10usx = .7227designsize;
+  uusx = usx*pt;
+  dd:=pixels_per_inch/120;
+  s = .5uusx;
+
+%
+% special
+%
+
+lw:=3.6*designsize/10*.3pt;
+vardef char.b(expr char_w, hheight) =
+  pickup pencircle scaled(lw + blacker);
+  y1=y2=-lw/2;
+  x1=0bs; x2:=5bs*3.6;
+  draw z1--z2;
+  penlabels(1,2);
+enddef;
+
+vardef char.a(expr char_w, hheight) =
+  pickup pencircle scaled(lw + blacker);
+  y1=y2=y5=y6=-lw/2;
+  y7:=-10bs*3.6;
+  x1:=0bs; x2:=3bs*3.6; x3:=4bs*3.6; x6:=10bs*3.6;
+  y3=y4;
+  (y1+y7)*2/5=y3; 
+  (x1+x6)/2=(x2+x5)/2=(x3+x4)/2=x7;
+  draw z1--z2--z3..z7..z4--z5--z6;
+  penlabels(1,2,3,4,5,6,7);
+enddef;
+
+def drawsq(expr dx, dy)=
+  draw z1 shifted (dx, dy)--z2 shifted (dx, dy);
+  draw z3 shifted (dx, dy)--z4 shifted (dx, dy); 
+  draw z5 shifted (dx, dy)--z6 shifted (dx, dy);
+  draw z7 shifted (dx, dy)--z8 shifted (dx, dy); 
+enddef;
+vardef char.A(expr char_w, hheight) =
+  pickup pencircle scaled(.15uus + blacker);
+  uux:=char_w/8; uuy:=hheight/8;
+  x1:=.5uux; x2:=1.5uux; x8:=2.5uux; x7:=3.5uux;
+  y1:=3.5uuy; y2:=2.5uuy; y4:=1.5uuy; y3:=.5uuy;
+  x1=x3; x2=x4; x8=x6; x7=x5;
+  y1=y7; y2=y8; y4=y6; y3=y5;
+  drawsq(0, 0);
+  drawsq(0,4uuy);
+  drawsq(4uux,0);
+  drawsq(4uux,4uuy);
+enddef;
+
+vardef char.B(expr char_w, hheight) =
+  pickup pencircle scaled(.15uus + blacker);
+  uux:=char_w/4; uuy:=hheight/4;
+  x1:=.5uux; x2:=1.5uux; x8:=2.5uux; x7:=3.5uux;
+  y1:=3.5uuy; y2:=2.5uuy; y4:=1.5uuy; y3:=.5uuy;
+  x1=x3; x2=x4; x8=x6; x7=x5;
+  y1=y7; y2=y8; y4=y6; y3=y5;
+  drawsq(0, 0);
+enddef;
+
+vardef char.C(expr char_w, hheight) =
+  numeric d,s;
+  d:=3; s:=1; if pixels_per_inch>=300:d:=d*dd; s:=s*dd; fi;
+  for y=0 step 2d until hheight-d: 
+    for x=0 step 2d until char_w-d:
+      fill (x,y)--(x,y+s)--(x+s,y+s)--(x+s,y)--cycle;   
+      endfor;
+  endfor;
+  for y=d step 2d until hheight-d: 
+    for x=d step 2d until char_w-d:
+      fill (x,y)--(x,y+s)--(x+s,y+s)--(x+s,y)--cycle;   
+      endfor;
+  endfor;
+enddef;
+
+vardef char.D(expr char_w, hheight) =
+  char.C(char_w, hheight);
+enddef;
+
+vardef char.E(expr char_w, hheight) =
+  numeric d;
+  d:=2; s:=1; if pixels_per_inch>300:d:=d*dd; s:=s*dd; fi;
+  for y=0 step 2d until hheight-d: 
+    for x=0 step 2d until char_w-d:
+      fill (x,y)--(x,y+s)--(x+s,y+s)--(x+s,y)--cycle;   
+      endfor;
+  endfor;
+  for y=d step 2d until hheight-d: 
+    for x=d step 2d until char_w-d:
+      fill (x,y)--(x,y+s)--(x+s,y+s)--(x+s,y)--cycle;   
+      endfor;
+  endfor;
+enddef;
+
+vardef char.F(expr char_w, hheight) =
+  char.E(char_w, hheight);
+enddef;
+
+def drawweb(expr dx, dy) =
+  draw z1 shifted (dx, dy)--z11 shifted (dx, dy);
+  draw z2 shifted (dx, dy)--z12 shifted (dx, dy);
+  draw z3 shifted (dx, dy)--z4 shifted (dx, dy);
+  draw z7 shifted (dx, dy)--z8 shifted (dx, dy);
+  draw z5 shifted (dx, dy)--z6 shifted (dx, dy);
+  draw z9 shifted (dx, dy)--z10 shifted (dx, dy);
+enddef;
+def drawwebx(expr dx, dy) =
+  draw z1 shifted (dx, dy)--z4 shifted (dx, dy);
+  draw z2 shifted (dx, dy)--z5 shifted (dx, dy);
+  draw z8 shifted (dx, dy)--z11 shifted (dx, dy);
+  draw z9 shifted (dx, dy)--z12 shifted (dx, dy);
+  draw z3 shifted (dx, dy)--z6 shifted (dx, dy);
+  draw z7 shifted (dx, dy)--z10 shifted (dx, dy);
+enddef;
+
+vardef char.G(expr char_w, hheight) =
+  pickup pencircle scaled(.15uus + blacker);
+  uux:=char_w/16; uuy:=hheight/16;
+  x1=x4=x8=x11=1uux;
+  x2=x5=x9=x12=3uux;
+  x3=x7=0uux; x6=x10=4uux;
+  y1=y2=4uuy; y11=y12=0uuy;
+  y3=y4=y5=y6=3uuy;
+  y7=y8=y9=y10=1uuy;
+  drawweb (0uux,12uuy); drawweb (8uux,12uuy);
+  drawweb (0uux,4uuy); drawweb (8uux,4uuy);
+  drawweb (4uux,8uuy); drawweb (12uux,8uuy);
+  drawweb (4uux,0uuy); drawweb (12uux,0uuy);
+  drawwebx(4uux,12uuy); drawwebx(12uux,12uuy);
+  drawwebx(4uux,4uuy); drawwebx(12uux,4uuy);
+  drawwebx(0uux,8uuy); drawwebx(8uux,8uuy);
+  drawwebx(0uux,0uuy); drawwebx(8uux,0uuy);
+enddef;
+ 
+vardef char.H(expr char_w, hheight) =
+  pickup pencircle scaled(.15uus + blacker);
+  uux:=char_w/8; uuy:=hheight/8;
+  x1=x4=x8=x11=1uux;
+  x2=x5=x9=x12=3uux;
+  x3=x7=0uux; x6=x10=4uux;
+  y1=y2=4uuy; y11=y12=0uuy;
+  y3=y4=y5=y6=3uuy;
+  y7=y8=y9=y10=1uuy;
+  drawweb(0uux,4uuy);
+  drawweb(4uux,0uuy);
+  drawwebx(4uux,4uuy);
+  drawwebx(0uux,0uuy);
+enddef;
+ 
+def drawwebs(expr dx, dy) =
+  draw z1 shifted (dx, dy)--z2 shifted (dx, dy);
+  draw z3 shifted (dx, dy)--z4 shifted (dx, dy);
+  draw z5 shifted (dx, dy)--z6 shifted (dx, dy);
+  draw z7 shifted (dx, dy)--z8 shifted (dx, dy);
+  draw z1 shifted (dx, dy)--z9 shifted (dx, dy);
+  draw z7 shifted (dx, dy)--z12 shifted (dx, dy);
+  draw z3 shifted (dx, dy)--z10 shifted (dx, dy);
+  draw z5 shifted (dx, dy)--z11 shifted (dx, dy);
+enddef;
+
+vardef char.I(expr char_w, hheight) =
+  pickup pencircle scaled(.15uus + blacker);
+  uux:=char_w/8; uuy:=hheight/8;
+  x2:=3uux; x4:=2uux; x6:=1uux; x8:=x4;
+  y2:=2uuy; y4:=3uuy; y6:=y2; y8:=1uuy;
+  y1:=4uuy; x3:=0uux; y5:=0uuy; x7:=4uux;
+  (y2-y1)=-(x2-x1); (y5-y6)=-(x5-x6);
+  (y7-y8)=(x7-x8); (y4-y3)=(x4-x3);
+  x9=x3; y10=y5; x11=x7; y12=y1;
+  (y7-y12)=-(x7-x12); (y10-y3)=-(x10-x3);
+  (y1-y9)=(x1-x9); (y11-y5)=(x11-x5);
+  drawwebs(0uux, 0uuy);
+  drawwebs(4uux,0uuy);
+  drawwebs(0uux,4uuy);
+  drawwebs(4uux,4uuy);
+  labels(1,2,3,4,5,6,7,8,9,10,11,12);
+enddef;
+  
+vardef char.J(expr char_w, hheight) =
+  pickup pencircle scaled(.15uus + blacker);
+  uux:=char_w/4; uuy:=hheight/4;
+  x2:=3uux; x4:=2uux; x6:=1uux; x8:=x4;
+  y2:=2uuy; y4:=3uuy; y6:=y2; y8:=1uuy;
+  y1:=4uuy; x3:=0uux; y5:=0uuy; x7:=4uux;
+  (y2-y1)=-(x2-x1); (y5-y6)=-(x5-x6);
+  (y7-y8)=(x7-x8); (y4-y3)=(x4-x3);
+  x9=x3; y10=y5; x11=x7; y12=y1;
+  (y7-y12)=-(x7-x12); (y10-y3)=-(x10-x3);
+  (y1-y9)=(x1-x9); (y11-y5)=(x11-x5);
+  drawwebs(0uux, 0uuy);
+enddef;
+  
+vardef char.K(expr char_w, hheight) =
+  pickup pencircle scaled(.15uus + blacker);
+  uux:=char_w/8; uuy:=hheight/8;
+  x1=x4=x8=x11=1uux;
+  x2=x5=x9=x12=3uux;
+  x3=x7=0uux; x6=x10=4uux;
+  y1=y2=4uuy; y11=y12=0uuy;
+  y3=y4=y5=y6=3uuy;
+  y7=y8=y9=y10=1uuy;
+  drawweb(0uux,4uuy);
+  drawweb(4uux,0uuy);
+  drawwebx(4uux,4uuy);
+  drawwebx(0uux,0uuy);
+enddef;
+
+vardef char.rtriangle(expr char_w, hheight) =
+  x1 = x2 = char_w - x3 = s;
+  y3 = .5hheight;
+  z1 - z2 = (z3 - z2) rotated 60;
+  fill z1--z2--z3--cycle;
+  labels(1,2,3);
+enddef;
+
+vardef char.ltriangle(expr char_w, hheight) =
+  char_w - x1 = char_w - x2 = x3 = s;
+  y3 = .5hheight;
+  z1 - z2 = (z3 - z2) rotated -60;
+  fill z1--z2--z3--cycle;
+  labels(1,2,3);
+enddef;
+ 
+vardef char.ttriangle(expr char_w, hheight) =
+  y1 = y2 = hheight - y3 = s;
+  x3 = .5char_w;
+  z1 - z2 = (z3 - z2) rotated 60;
+  fill z1--z2--z3--cycle;
+  labels(1,2,3);
+enddef;
+ 
+vardef char.btriangle(expr char_w, hheight) =
+  hheight - y1 = hheight - y2 = y3 = s;
+  x3 = .5char_w;
+  z1 - z2 = (z3 - z2) rotated -60;
+  fill z1--z2--z3--cycle;
+  labels(1,2,3);
+enddef;
+ 
+vardef char.cr(expr char_w, hheight) =
+  x1 = s; x2 = x3 = .4char_w;
+  y2 = -.2(y3-y2);
+  z1 - z2 = (z1 - z3) rotated -90;
+  fill z1--z2--z3--cycle;
+  pw := .4(y3-y2);
+  y4 = hheight - s; x4 = x5 = char_w - .5pw - s;
+  y5 = y6 = y1; x6 = x3;
+  z7 = (x4, y5+.7pw); z8 = (x5-.7pw, y6);
+  penpos4(pw, 0); penpos6(pw, -90);
+  penpos7(pw, 0); penpos8(pw, -90);
+  %penstroke z4--z7..z8--z6;
+  fill z4l--z7l{z5-z7}..{z8-z5}z8l--z6l--z6r--z8r{z5-z8}..{z7-z5}z7r--z4r--cycle;
+  labels(1,2,3,4,5,6,7,8,4l,4r,7l,7r,8l,8r,6l,6r);
+enddef;
+ 
+vardef char.CR(expr char_w, hheight) =
+  char.cr(char_w, hheight);
+enddef;
+
+vardef make@#(expr char_w,hheight,ydepth)=
+ begingroup beginchar(str@#,char_w,hheight,ydepth);
+ "the character "&str @#; char@#(char_w*pt,hheight*pt);
+% if (fontsize#*mag>30) and (proofing=0): mask(char_w,hheight); fi
+ endchar;
+endgroup enddef;
+
+vardef Make@#(expr code, char_w,hheight,ydepth)=
+ begingroup beginchar(code,char_w,hheight,ydepth);
+ "the character "&code ; char@#(char_w*pt,hheight*pt);
+ endchar;
+endgroup enddef;
+
+
+smoothing:=10;
+Make.rtriangle("0", 9usx, 10usx, 0us);
+Make.ltriangle("1", 9usx, 10usx, 0us);
+Make.ttriangle("2", 10usx, 9usx, 0us);
+Make.btriangle("3", 10usx, 9usx, 0us);
+Make.cr(" ", 12usx, 9usx, 2usx);
+Make.CR("@", 24usx, 18usx, 4usx);
+make.A(10usx,10usx,0us);
+make.B(5usx,5usx,0us);
+make.C(10usx,10usx,0us);
+make.D(5usx,5usx,0us);
+make.E(10usx,10usx,0us);
+make.F(5usx,5usx,0us);
+make.G(10us,10us,0us);
+make.H(5us,5us,0us);
+make.I(10us,10us,0us);
+make.J(5us,5us,0us);
+make.K(10us,10us,0us);
+make.a(36bss,0bss,36bss);
+make.b(18bss,0bss,36bss);
+
+end;

@@ -34,6 +34,12 @@ install:
 	cp ./LICENSE ${TEXMF}/doc/latex/ascmac/
 	cp ./README.md ${TEXMF}/doc/latex/ascmac/
 	cp ./*.pdf ${TEXMF}/doc/latex/ascmac/
+	mkdir -p ${TEXMF}/fonts/source/public/ascmac
+	cp ./*.mf ${TEXMF}/fonts/source/public/ascmac/
+	mkdir -p ${TEXMF}/fonts/type1/public/ascmac
+	cp ./*.pfb ${TEXMF}/fonts/type1/public/ascmac/
+	mkdir -p ${TEXMF}/fonts/tfm/public/ascmac
+	cp ./*.tfm ${TEXMF}/fonts/tfm/public/ascmac/
 	mkdir -p ${TEXMF}/source/latex/ascmac
 	cp ./Makefile ${TEXMF}/source/latex/ascmac/
 	cp ./*.dtx ${TEXMF}/source/latex/ascmac/
