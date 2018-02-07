@@ -5,11 +5,6 @@ Japanese pLaTeX distribution. These macros and fonts were
 originally developed by ASCII MEDIA WORKS, and now
 maintained by Japanese TeX Development Community.
 
-## Repository
-
-The bundle is maintained on GitHub:
-https://github.com/texjporg/ascmac
-
 ## Changes from the original ASCII edition
 
 See the documents (ascmac.pdf) for more information.
@@ -18,6 +13,11 @@ See the documents (ascmac.pdf) for more information.
 - Fix several bugs in `\oval` drawings, which are used in
   `screen` environment and `\keytop`.
 - Made compatible with the package "pict2e".
+
+## Repository
+
+The bundle is maintained on GitHub:
+https://github.com/texjporg/ascmac
 
 ## License
 
