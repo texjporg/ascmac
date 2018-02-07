@@ -1,0 +1,111 @@
+%%
+%% This is file `varascmac.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% varascmac.dtx  (with options: `varascmac')
+%% 
+%% Copyright (c) 2010 ASCII MEDIA WORKS
+%% Copyright (c) 2016-2018 Japanese TeX Development Community
+%% 
+%% This file is part of ascmac community edition.
+%% -------------------------------------------------------------
+%% 
+%% varascmac.sty
+%% written by Hironobu Yamashita (@aminophen)
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{varascmac}
+  [2018/02/07 v0.3 ascmac variant]
+\RequirePackage{ascmac}
+%%
+%% Triangles using ascgrp font
+\newcommand{\asciirtriangle}{{\@ascgrp 0}}
+\newcommand{\asciiltriangle}{{\@ascgrp 1}}
+\newcommand{\asciittriangle}{{\@ascgrp 2}}
+\newcommand{\asciibtriangle}{{\@ascgrp 3}}
+%%
+\def\vascmac@status{0}
+\DeclareOption{usedtou}{\def\vascmac@status{1}}
+\ProcessOptions\relax
+%%
+%% On pdfLaTeX etc, `usedtou' falls back to graphics rotation
+\if 1\vascmac@status
+  \ifascmac@ptex\else
+    \PackageWarning{varascmac}{%
+      Option `usedtou' requires pLaTeX, upLaTeX\MessageBreak
+      or LuaLaTeX with LuaTeX-ja support!\MessageBreak
+      I'm going to ignore it ...}
+    \def\vascmac@status{0}
+  \fi
+\fi
+%%
+%% Required package should be loaded before \catcode trick
+\if 0\vascmac@status
+  \RequirePackage{graphics}
+\fi
+%%
+\chardef\ascmac@q@catcode=\catcode`\Q\relax
+\ifascmac@ptex
+  \catcode`\Q=9\relax
+\else
+  \catcode`\Q=14\relax
+\fi
+%%
+\if 0\vascmac@status
+%% Common implementation: requires graphics package
+\def\varboxnote{\par\vspace{.3\baselineskip}%
+Q \@saveybaselineshift\ybaselineshift\ybaselineshift\z@
+Q \@savetbaselineshift\tbaselineshift\tbaselineshift\z@
+  \@bw=\linewidth \advance\@bw-42.16pt
+  \setbox\@nbody=\hbox\bgroup\begin{minipage}{\@bw}% (KN:1998/02/27)
+Q   \ybaselineshift\@saveybaselineshift \tbaselineshift\@savetbaselineshift
+}%
+\def\endvarboxnote{\end{minipage}\egroup
+  \@tempdima=\ht\@nbody
+  \advance\@tempdima\dp\@nbody \advance\@tempdima40pt
+  \setbox\@nbox=\hbox{\@ascgrp b\hss a\hss b}%
+  \@whiledim \wd\@nbox<\@tempdima \do{%
+    \setbox\@nbox=\hbox{\@ascgrp\unhbox\@nbox \hss a\hss b}}%
+  \setbox\@nbox=\hb@xt@\@tempdima{\@ascgrp\unhbox\@nbox \hss a\hss b}%
+  \vbox{\parindent\z@\offinterlineskip
+  \hrule\@height1.08pt
+  \hb@xt@\hsize{\rotatebox{90}{\raise\dp\@nbox\box\@nbox}\hfil\vbox{\vskip20pt
+  \box\@nbody\vskip20pt}\hfil\vrule\@width1.08pt}%
+  \hrule\@height1.08pt}}
+%%
+\catcode`\Q=\ascmac@q@catcode\relax
+\expandafter\endinput
+\fi
+%%
+\if 1\vascmac@status
+%% Another implementation: uses \iftdir, \yoko and \dtou
+\def\asc@dtou@dir{\iftdir\yoko\else\dtou\fi}
+\def\varboxnote{\par\vspace{.3\baselineskip}%
+  \@saveybaselineshift\ybaselineshift\ybaselineshift\z@
+  \@savetbaselineshift\tbaselineshift\tbaselineshift\z@
+  \@bw=\linewidth \advance\@bw-42.16pt
+  \setbox\@nbody=\hbox\bgroup\begin{minipage}{\@bw}% (KN:1998/02/27)
+    \ybaselineshift\@saveybaselineshift \tbaselineshift\@savetbaselineshift
+}%
+\def\endvarboxnote{\end{minipage}\egroup
+  \@tempdima=\ht\@nbody \advance\@tempdima20pt
+  \iftdir\else \advance\@tempdima\dp\@nbody \advance\@tempdima20pt \fi
+  \setbox\@nbox=\hbox{\asc@dtou@dir\@ascgrp b\hss a\hss b}%
+  \@whiledim \ht\@nbox<\@tempdima \do{%
+    \setbox\@nbox=\hbox{\asc@dtou@dir\@ascgrp\unhbox\@nbox \hss a\hss b}}%
+  \iftdir \advance\@tempdima\dp\@nbody \advance\@tempdima20pt \fi
+  \setbox\@nbox=\hb@xt@\@tempdima{\asc@dtou@dir\@ascgrp\unhbox\@nbox \hss a\hss b}%
+  \vbox{\parindent\z@\offinterlineskip
+  \hrule\@height1.08pt
+  \hb@xt@\hsize{\raise\dp\@nbox\box\@nbox\hfil\vbox{\vskip20pt
+  \box\@nbody\vskip20pt}\hfil\vrule\@width1.08pt}%
+  \hrule\@height1.08pt}}
+%%
+\catcode`\Q=\ascmac@q@catcode\relax
+\expandafter\endinput
+\fi
+%%
+\endinput
+%%
+%% End of file `varascmac.sty'.
