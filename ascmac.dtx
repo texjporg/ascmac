@@ -81,7 +81,7 @@
 \GetFileInfo{ascmac.dtx}
 \title{The \textsf{ascmac} package \fileversion}
 \author{Japanese \TeX\ Development Community}
-\date{$B:n@.F|!'(B\filedate}
+\date{作成日：\filedate}
 \begin{document}
   \maketitle
   \DocInput{\filename}
@@ -91,105 +91,105 @@
 %
 % \tableofcontents
 %
-% \section{$B$O$8$a$K(B}
+% \section{はじめに}
 %
-% \textsf{ascmac}$B%Q%C%1!<%8$O!"(B\LaTeXe{}$B$NI8=`5!G=$NHO0O$G!"?^$d7S@~$G(B
-% $B0O$s$@%\%C%/%9$r=PNO$9$kL?Na$J$I$rDs6!$7$^$9!#(B\textsf{ascmac}$B%Q%C%1!<%8(B
-% $B$N<BBN$O(B\textsf{tascmac}$B%Q%C%1!<%8$G$9$,!"$3$l$O$b$H$b$H8E$$(Bp\LaTeX{}$B$G(B
-% $BG[I[$5$l$F$$$?2#AH@lMQ(B\textsf{ascmac}$B%Q%C%1!<%8$H!"$=$l$r=DAH$KBP1~$5$;(B
-% $B$?(B\textsf{tascmac}$B%Q%C%1!<%8$rE}9g$7$?L>;D$G$9!#(B
+% \textsf{ascmac}パッケージは、\LaTeXe{}の標準機能の範囲で、図や罫線で
+% 囲んだボックスを出力する命令などを提供します。\textsf{ascmac}パッケージ
+% の実体は\textsf{tascmac}パッケージですが、これはもともと古いp\LaTeX{}で
+% 配布されていた横組専用\textsf{ascmac}パッケージと、それを縦組に対応させ
+% た\textsf{tascmac}パッケージを統合した名残です。
 %
-% $B$3$N%I%-%e%a%s%H$O!"%"%9%-!<$K$h$C$FG[I[$5$l$F$$$k(B 2006/07/14 $B%P!<%8%g%s(B
-% $B$+$iGI@8$7$F!"F|K\8l(B\TeX{}$B3+H/%3%_%e%K%F%#$K$h$C$F3+H/$5$l$F$$$k%P!<%8%g%s(B
-% $B$N$?$a$K?7$?$K=q$+$l$^$7$?!#%3%_%e%K%F%#HG$G$O!"%*%j%8%J%k$N%"%9%-!<HG$N(B
-% $B%3!<%I$r85$K!"$$$/$D$+$N%P%0=$@5$HB>$N%Q%C%1!<%8$H$N8_49@-$r2~A1$7$^$7$?!#(B
-% $B$^$?!"(Bv2.0c$B0J9_$G$O(Bpdf\LaTeX{}$B$J$I$N%(%s%8%s$b%5%]!<%H$7$^$7$?!#(B
+% このドキュメントは、アスキーによって配布されている 2006/07/14 バージョン
+% から派生して、日本語\TeX{}開発コミュニティによって開発されているバージョン
+% のために新たに書かれました。コミュニティ版では、オリジナルのアスキー版の
+% コードを元に、いくつかのバグ修正と他のパッケージとの互換性を改善しました。
+% また、v2.0c以降ではpdf\LaTeX{}などのエンジンもサポートしました。
 %
-% \section{$B;H$$$+$?(B}
+% \section{使いかた}
 %
-% \subsection{$B4D6-7?$NL?Na(B}
+% \subsection{環境型の命令}
 %
-% \textsf{ascmac}$B%Q%C%1!<%8$,Ds6!$9$k4D6-7?$NL?Na$O(B4$B<oN`$"$j$^$9!#$=$l$>$l(B
-% $B%F%-%9%H$J$I$r7S@~OH$G0O$s$G=PNO$7$^$9!#(B
+% \textsf{ascmac}パッケージが提供する環境型の命令は4種類あります。それぞれ
+% テキストなどを罫線枠で囲んで出力します。
 %
-% $B$3$l$i$N4D6-$O!"$9$Y$F2#I}$,$=$N;~E@$G$N(B |\linewidth| $B$NCM$K$J$j$^$9$N(B
-% $B$G!"%\%C%/%9$NI}$rJQ99$7$?$$>l9g$O(B |minipage| $B4D6-$J$I$G0O$s$G$/$@$5$$!#(B
-% $B=D$ND9$5$O!"<+F0E*$KFbMF$K9g$o$;$FD4@0$5$l$^$9!#(B \medskip
+% これらの環境は、すべて横幅がその時点での |\linewidth| の値になりますの
+% で、ボックスの幅を変更したい場合は |minipage| 環境などで囲んでください。
+% 縦の長さは、自動的に内容に合わせて調整されます。 \medskip
 %
 % \DescribeEnv{boxnote}
-% |boxnote| $B4D6-$O!"GK$C$?%a%bMQ;f$N$h$&$JJ70O5$$N%\%C%/%9$r:n$j$^$9!#(B
-% $BGK$C$?$h$&$J7A$N7S@~$O!"(Bascgrp$B%U%)%s%H$r;H$C$F<B8=$5$l$F$$$^$9!#(B
+% |boxnote| 環境は、破ったメモ用紙のような雰囲気のボックスを作ります。
+% 破ったような形の罫線は、ascgrpフォントを使って実現されています。
 %
 % \begin{boxnote}
-% $B%\%C%/%9%N!<%H4D6-$G$9!#(B
+% ボックスノート環境です。
 % \end{boxnote}
-% $B$O!"0J2<$NF~NO$+$iF@$i$l$^$9!#(B
+% は、以下の入力から得られます。
 %\begin{verbatim}
 % \begin{boxnote}
-% $B%\%C%/%9%N!<%H4D6-$G$9!#(B
+% ボックスノート環境です。
 % \end{boxnote}
 %\end{verbatim}
 %
 % \DescribeEnv{screen}
-% |screen| $B4D6-$O!";M6y$,4]$$0O$_OH$NCf$K%F%-%9%H$rF~$l$^$9!#(B
-% $B%*%W%7%g%s0z?t$H$7$F(B |0| $B$+$i(B |8| $B$N@0?tCM$r;XDj$9$l$P!";M6y$N4]$_$N(B
-% $B6q9g$rJQ99$9$k$3$H$,$G$-$^$9!#@0?tCM$rBg$-$/$9$k$K$D$l$F4]$_$O>.$5$/(B
-% $B$J$C$F$$$-$^$9!#>JN,$7$?>l9g$O(B |0| $B$H$_$J$5$l$^$9!#(B
+% |screen| 環境は、四隅が丸い囲み枠の中にテキストを入れます。
+% オプション引数として |0| から |8| の整数値を指定すれば、四隅の丸みの
+% 具合を変更することができます。整数値を大きくするにつれて丸みは小さく
+% なっていきます。省略した場合は |0| とみなされます。
 %
 % \begin{screen}
-% $B;M6y$,4]$$0O$_OH$G$9!#(B
+% 四隅が丸い囲み枠です。
 % \end{screen}
 % \begin{screen}[4]
-% $B;M6y$,4]$$0O$_OH$G$9!#(B
+% 四隅が丸い囲み枠です。
 % \end{screen}
-% $B$O!"0J2<$NF~NO$+$iF@$i$l$^$9!#(B
+% は、以下の入力から得られます。
 %\begin{verbatim}
 % \begin{screen}
-% $B;M6y$,4]$$0O$_OH$G$9!#(B
+% 四隅が丸い囲み枠です。
 % \end{screen}
 % \begin{screen}[4]
-% $B;M6y$,4]$$0O$_OH$G$9!#(B
+% 四隅が丸い囲み枠です。
 % \end{screen}
 %\end{verbatim}
 %
 % \DescribeEnv{itembox}
-% |itembox| $B4D6-$O(B |screen| $B4D6-$K;w$F$$$^$9$,!">eC<$N7S@~$N$H$3$m$K%?%$%H%k(B
-% $B$r=PNO$9$k$3$H$,$G$-$^$9!#$^$?!"%*%W%7%g%s0z?t(B |l|, |c|, |r| $B$G%?%$%H%k(B
-% $B$N=PNO0LCV$r:8!"Cf1{!"1&$H;XDj$G$-$^$9!#>JN,$7$?>l9g$OCf1{$K$J$j$^$9!#(B
+% |itembox| 環境は |screen| 環境に似ていますが、上端の罫線のところにタイトル
+% を出力することができます。また、オプション引数 |l|, |c|, |r| でタイトル
+% の出力位置を左、中央、右と指定できます。省略した場合は中央になります。
 %
-% \begin{itembox}[l]{$B%?%$%H%k(B}
-% $B9`L\%\%C%/%9$G$9!#(B
+% \begin{itembox}[l]{タイトル}
+% 項目ボックスです。
 % \end{itembox}
-% $B$O!"0J2<$NF~NO$+$iF@$i$l$^$9!#(B
+% は、以下の入力から得られます。
 %\begin{verbatim}
-% \begin{itembox}[l]{$B%?%$%H%k(B}
-% $B9`L\%\%C%/%9$G$9!#(B
+% \begin{itembox}[l]{タイトル}
+% 項目ボックスです。
 % \end{itembox}
 %\end{verbatim}
 %
 % \DescribeEnv{shadebox}
-% |shadebox| $B4D6-$O!"1FIU$-%\%C%/%9$NCf$K%F%-%9%H$rF~$l$^$9!#(B
-% $B1F$NI}$O(B |\shaderule| $B%Q%i%a!<%?$G5,Dj$5$l!"%G%U%)%k%H$O(B5pt$B$G$9!#(B
+% |shadebox| 環境は、影付きボックスの中にテキストを入れます。
+% 影の幅は |\shaderule| パラメータで規定され、デフォルトは5ptです。
 %
 % \begin{shadebox}
-% $B1FIU$-$N%\%C%/%9$G$9!#(B
+% 影付きのボックスです。
 % \end{shadebox}
-% $B$O!"0J2<$NF~NO$+$iF@$i$l$^$9!#(B
+% は、以下の入力から得られます。
 %\begin{verbatim}
 % \begin{shadebox}
-% $B1FIU$-$N%\%C%/%9$G$9!#(B
+% 影付きのボックスです。
 % \end{shadebox}
 %\end{verbatim}
 %
-% \subsection{$BLV3]$1L?Na(B}
+% \subsection{網掛け命令}
 %
-% $BLV3]$1$r$9$kL?Na$,(B3$B<oN`MQ0U$5$l$F$$$^$9!#(B|\mask| $BL?Na$O!"0z?t$NFbMF$NItJ,(B
-% $B$KLV$r3]$1$^$9!#(B|\maskbox| $BL?Na$H(B |\Maskbox| $BL?Na$O!"I}$H9b$5$r;XDj$7$F(B
-% $BLV3]$1$9$k$3$H$,$G$-$^$9!#$=$7$F!"(B|\maskbox| $BL?Na$H(B |\Maskbox| $BL?Na$N0c$$(B
-% $B$O!"8e<T$N$_%\%C%/%9$N<~$j$K7S@~$r0z$/$H$$$&E@$G$9!#(B
+% 網掛けをする命令が3種類用意されています。|\mask| 命令は、引数の内容の部分
+% に網を掛けます。|\maskbox| 命令と |\Maskbox| 命令は、幅と高さを指定して
+% 網掛けすることができます。そして、|\maskbox| 命令と |\Maskbox| 命令の違い
+% は、後者のみボックスの周りに罫線を引くという点です。
 %
-% $B$3$l$i$NL?Na$O!"$$$:$l$b(Bascgrp$B%U%)%s%H$K<}O?$5$l$F$$$kLV3]$1%Q%?!<%s$N(B
-% $BJ8;z$rJB$Y$k$3$H$GLV3]$1$r<B8=$7$F$$$^$9!#(B
+% これらの命令は、いずれもascgrpフォントに収録されている網掛けパターンの
+% 文字を並べることで網掛けを実現しています。
 %
 % \makeatletter
 % \begin{table}[htbp]
@@ -203,68 +203,68 @@
 % \makeatother
 %
 % \DescribeMacro{\mask}
-% |\mask| $BL?Na$O!"Bh(B1$B0z?t$,LV3]$1$r$9$kFbMF$G!"Bh(B2$B0z?t$,LV3]$1%Q%?!<%s$r(B
-% $B<($95-9f!J(BA$B$+$i(BK$B!K$G$9!#(B
+% |\mask| 命令は、第1引数が網掛けをする内容で、第2引数が網掛けパターンを
+% 示す記号（AからK）です。
 %
 % \begin{center}
-% \mask{$BLV3]$1Nc(B1}{A} \hfil \mask{$BLV3]$1Nc(B2}{C}
+% \mask{網掛け例1}{A} \hfil \mask{網掛け例2}{C}
 % \end{center}
-% $B$O!"0J2<$NF~NO$+$iF@$i$l$^$9!#(B
+% は、以下の入力から得られます。
 %\begin{verbatim}
-% \mask{$BLV3]$1Nc(B1}{A} \hfil \mask{$BLV3]$1Nc(B2}{C}
+% \mask{網掛け例1}{A} \hfil \mask{網掛け例2}{C}
 %\end{verbatim}
 %
 % \DescribeMacro{\maskbox}
-% |\maskbox| $BL?Na$O(B5$B$D$N0z?t$r;}$A!"$=$l$>$l%\%C%/%9$NI}!"9b$5!"(B
-% $BLV3]$1%Q%?!<%s!"=PNO0LCV!"LV3]$1$r$9$kFbMF$G$9!#=PNO0LCV$O(B |l|, |c|, |r| $B$N(B
-% $B$$$:$l$+$G!"$=$l$>$l:8!"Cf1{!"1&$K=PNO$7$^$9!#(B
+% |\maskbox| 命令は5つの引数を持ち、それぞれボックスの幅、高さ、
+% 網掛けパターン、出力位置、網掛けをする内容です。出力位置は |l|, |c|, |r| の
+% いずれかで、それぞれ左、中央、右に出力します。
 %
 % \begin{center}
-% \maskbox{25em}{4em}{E}{c}{$BI}$r;XDj$7$?LV3]$1%\%C%/%9(B}
+% \maskbox{25em}{4em}{E}{c}{幅を指定した網掛けボックス}
 % \end{center}
-% $B$O!"0J2<$NF~NO$+$iF@$i$l$^$9!#(B
+% は、以下の入力から得られます。
 %\begin{verbatim}
-% \maskbox{25em}{4em}{E}{c}{$BI}$r;XDj$7$?LV3]$1%\%C%/%9(B}
+% \maskbox{25em}{4em}{E}{c}{幅を指定した網掛けボックス}
 %\end{verbatim}
 %
 % \DescribeMacro{\Maskbox}
-% |\Maskbox| $BL?Na$O(B |\maskbox| $BL?Na$HF1MM$N0z?t$r;}$A$^$9$,!"LV3]$1$r$9$kFbMF$N(B
-% $B;XDj$NA0!"$9$J$o$A(B5$BHVL\$N0z?t$H$7$F!"%\%C%/%9$r0O$`7S@~$NB@$5$b;XDj$7$^$9!#(B
-% $B$7$?$,$C$F!"A4It$G(B6$B$D$N0z?t$r;}$A$^$9!#(B
+% |\Maskbox| 命令は |\maskbox| 命令と同様の引数を持ちますが、網掛けをする内容の
+% 指定の前、すなわち5番目の引数として、ボックスを囲む罫線の太さも指定します。
+% したがって、全部で6つの引数を持ちます。
 %
 % \begin{center}
-% \Maskbox{30em}{4em}{A}{c}{1pt}{$BI}$r;XDj$7$?7S@~IU$-LV3]$1%\%C%/%9(B}
+% \Maskbox{30em}{4em}{A}{c}{1pt}{幅を指定した罫線付き網掛けボックス}
 % \end{center}
-% $B$O!"0J2<$NF~NO$+$iF@$i$l$^$9!#(B
+% は、以下の入力から得られます。
 %\begin{verbatim}
-% \Maskbox{30em}{4em}{A}{c}{1pt}{$BI}$r;XDj$7$?7S@~IU$-LV3]$1%\%C%/%9(B}
+% \Maskbox{30em}{4em}{A}{c}{1pt}{幅を指定した罫線付き網掛けボックス}
 %\end{verbatim}
 %
-% \subsection{$B$=$NB>$NL?Na(B}
+% \subsection{その他の命令}
 %
 % \DescribeMacro{\keytop}
-% |\keytop| $B%3%^%s%I$O!"%-!<%\!<%I>e$NJ8;z$r<($9$H$-$J$I$KJXMx$G$9!#(B
+% |\keytop| コマンドは、キーボード上の文字を示すときなどに便利です。
 %
 % \begin{table}[htbp]
 %   \centering
 %   \begin{tabular}{cc}
-%     $BF~NO(B          & $B=PNO(B        \\
+%     入力          & 出力        \\
 %     |\keytop{A}|  & \keytop{A}  \\
-%     |\keytop{$B$"(B}| & \keytop{$B$"(B}
+%     |\keytop{あ}| & \keytop{あ}
 %   \end{tabular}
 % \end{table}
 %
 % \DescribeMacro{\yen}
 % \DescribeMacro{\return}
 % \DescribeMacro{\Return}
-% $B1_5-9f$r=PNO$9$k(B |\yen| $BL?Na$O!"(BY$B$H(B=$B$r=E$M9g$o$;$F=PNO$7$F$$$^$9!#(B
-% $B2~9T5-9f$O(B |\return| $B$H(B |\Return| $B$G$9!#2~9T5-9f$O(Bascgrp$B%U%)%s%H(B
-% $B$rMQ$$$F$$$^$9!#(B
+% 円記号を出力する |\yen| 命令は、Yと=を重ね合わせて出力しています。
+% 改行記号は |\return| と |\Return| です。改行記号はascgrpフォント
+% を用いています。
 %
 % \begin{table}[htbp]
 %   \centering
 %   \begin{tabular}{cc}
-%     $BF~NO(B          & $B=PNO(B        \\
+%     入力          & 出力        \\
 %     |\yen|        & \yen        \\
 %     |\return|     & \return     \\
 %     |\Return|     & \Return
@@ -274,26 +274,26 @@
 % \DescribeMacro{\ascii}
 % \DescribeMacro{\Ascii}
 % \DescribeMacro{\ASCII}
-% $B%"%9%-!<%3!<%]%l!<%7%g%s$N%m%4$r=PNO$9$kL?Na$G$9!#(B
-% $B%5%$%:$O(B3$B<oN`MQ0U$5$l$F$$$^$9!#(B
+% アスキーコーポレーションのロゴを出力する命令です。
+% サイズは3種類用意されています。
 %
 % \ascii \hfil \Ascii \hfil \ASCII
 %
 %
 % \StopEventually{}
 %
-% \section{$B%3!<%I(B}
+% \section{コード}
 %
-% \textsf{ascmac}$B%Q%C%1!<%8$O(B\textsf{tascmac}$B%Q%C%1!<%8$N%i%C%Q!<$G$9!#(B
+% \textsf{ascmac}パッケージは\textsf{tascmac}パッケージのラッパーです。
 %    \begin{macrocode}
 %<*ascmac>
 \RequirePackage{tascmac}
 %</ascmac>
 %    \end{macrocode}
 %
-% $B=>Mh!"(B\textsf{tascmac}$B%Q%C%1!<%8$NF0:n>r7o$O!"(Bp\LaTeXe{}$B$G$7$?!#(B
-% $B$7$+$7!"(Bcommunity edition$B$G$O!"%P!<%8%g%s(Bv2.0c$B0J9_$G$[$+$N%(%s%8%s$b(B
-% $B%5%]!<%H$9$k$3$H$K$7$^$7$?!#(B
+% 従来、\textsf{tascmac}パッケージの動作条件は、p\LaTeXe{}でした。
+% しかし、community editionでは、バージョンv2.0c以降でほかのエンジンも
+% サポートすることにしました。
 %    \begin{macrocode}
 %<*tascmac>
 %%
@@ -315,11 +315,11 @@
 \fi
 %    \end{macrocode}
 %
-% (u)p\LaTeXe{}$B$H(BLua\TeX-ja$B0J30$r%5%]!<%H$9$k$?$a$N%H%j%C%/$G$9!#(B
-% $B!V(BQ$B!W$H$$$&J8;z$N%+%F%4%j!<%3!<%I$r$3$N%Q%C%1!<%8$rFI$s$G$$$k4V$@$1(B
-% $BJQ99$7!"(B(u)p\LaTeXe{}$B$^$?$O(BLua\TeX-ja$B$G$OL5;k$9$kJ8;z$K!"$=$l0J30$G$O(B
-% $B%3%a%s%HJ8;z!J(B|%|$B$HF1$8!K$K$7$^$9!#(B
-% \changes{2016/08/21}{v2.0c}{pdf\LaTeX{}$B$J$I$r%5%]!<%H(B}
+% (u)p\LaTeXe{}とLua\TeX-ja以外をサポートするためのトリックです。
+% 「Q」という文字のカテゴリーコードをこのパッケージを読んでいる間だけ
+% 変更し、(u)p\LaTeXe{}またはLua\TeX-jaでは無視する文字に、それ以外では
+% コメント文字（|%|と同じ）にします。
+% \changes{2016/08/21}{v2.0c}{pdf\LaTeX{}などをサポート}
 %    \begin{macrocode}
 \chardef\ascmac@q@catcode=\catcode`\Q\relax
 \ifascmac@ptex
@@ -329,11 +329,11 @@
 \fi
 %    \end{macrocode}
 %
-% pdf\LaTeX{}$B$d(BLua\LaTeX{}$B$N%W%j%_%F%#%V$r;H$C$F!"(Bascgrp$B$N(BType1$B%U%)%s%H$r(B
-% $B;HMQ$G$-$k$h$&$K@_Dj$7$^$9!#(B
-% \changes{2016/08/21}{v2.0c}{pdf\LaTeX{}$B$G(Bascgrp$B$N(BType1$B%U%)%s%H$r;HMQ(B}
-% \changes{2017/12/06}{v2.0e}{$BG0$N$?$a(Be-$B3HD%$J$7$N%(%s%8%s$G$N%(%i!<$rKI;_(B}
-% \changes{2017/12/17}{v2.0f}{$BH=Dj$,5U$K$J$C$F$$$?$N$r=$@5(B}
+% pdf\LaTeX{}やLua\LaTeX{}のプリミティブを使って、ascgrpのType1フォントを
+% 使用できるように設定します。
+% \changes{2016/08/21}{v2.0c}{pdf\LaTeX{}でascgrpのType1フォントを使用}
+% \changes{2017/12/06}{v2.0e}{念のためe-拡張なしのエンジンでのエラーを防止}
+% \changes{2017/12/17}{v2.0f}{判定が逆になっていたのを修正}
 %    \begin{macrocode}
 %%
 %% Use Type1 font for ascgrp (pdfLaTeX, LuaLaTeX)
@@ -356,8 +356,8 @@
 %
 % \begin{macro}{\@savetbaselineshift}
 % \begin{macro}{\@saveybaselineshift}
-% |\tbaselineshift| $B$H(B |\ybaselineshift| $B$r0l;~B`Hr$9$k$?$a$N=`Hw$G$9!#(B
-% \changes{2016/08/21}{v2.0c}{$BDj5A:Q$_$N>l9g$O$"$($FDj5A$7$J$$$h$&$K$7$?(B}
+% |\tbaselineshift| と |\ybaselineshift| を一時退避するための準備です。
+% \changes{2016/08/21}{v2.0c}{定義済みの場合はあえて定義しないようにした}
 %    \begin{macrocode}
 %%
 %% ascmac.sty 10/28 '88
@@ -373,7 +373,7 @@ Q \ifx\@saveybaselineshift\@undefined \newdimen\@saveybaselineshift \fi
 % \begin{macro}{\ascii}
 % \begin{macro}{\Ascii}
 % \begin{macro}{\ASCII}
-% $B%"%9%-!<%3!<%]%l!<%7%g%s$N%m%4$G$9!#(B
+% アスキーコーポレーションのロゴです。
 %    \begin{macrocode}
 %% ASCII logo
 \def\@@ASCII#1#2#3{\shortstack{#1 ASCII \\[#3]
@@ -391,7 +391,7 @@ Q \ifx\@saveybaselineshift\@undefined \newdimen\@saveybaselineshift \fi
 % \end{macro}
 % \end{macro}
 %
-% |boxnote| $B4D6-$J$I$G;H$&L?Na$N=`Hw$G$9!#(B
+% |boxnote| 環境などで使う命令の準備です。
 %    \begin{macrocode}
 %% boxnote environment
 \font\@ascgrp=ascgrp
@@ -400,7 +400,7 @@ Q \ifx\@saveybaselineshift\@undefined \newdimen\@saveybaselineshift \fi
 %    \end{macrocode}
 %
 % \begin{environment}{boxnote}
-% |boxnote| $B4D6-$rDj5A$7$^$9!#(B
+% |boxnote| 環境を定義します。
 %    \begin{macrocode}
 \def\boxnote{\par\vspace{.3\baselineskip}%
 Q \@saveybaselineshift\ybaselineshift\ybaselineshift\z@
@@ -426,12 +426,12 @@ Q   \ybaselineshift\@saveybaselineshift \tbaselineshift\@savetbaselineshift
 %    \end{macrocode}
 % \end{environment}
 %
-% |screen| $B4D6-$J$I$G;H$&L?Na$N=`Hw$G$9!#(B
-% $B%3%_%e%K%F%#HG$G$O!"=DAH$G(Bpict2e$B%Q%C%1!<%8$H6&B8$7$F$b2u$l$J$$$h$&$K!"(B
-% |\oval| $B$r>o$K2#AH%\%C%/%9$NCf$G8F$S=P$9$h$&$K$7$^$7$?!#(B
-% $B$3$N$H$-$K(B |\oval| $B$N0z?t$r@5$7$/EO$9=hM}$bDI2C$7$F$$$^$9!#(B
-% \changes{2017/12/22}{v2.0g}{$B=DAH$G(Bpict2e$B$H6&B8$7$F$b2u$l$J$$$h$&$K!"(B
-%    \cs{oval}$B$r>o$K2#AH%\%C%/%9$NCf$G8F$S=P$9$h$&$K$7$?(B}
+% |screen| 環境などで使う命令の準備です。
+% コミュニティ版では、縦組でpict2eパッケージと共存しても壊れないように、
+% |\oval| を常に横組ボックスの中で呼び出すようにしました。
+% このときに |\oval| の引数を正しく渡す処理も追加しています。
+% \changes{2017/12/22}{v2.0g}{縦組でpict2eと共存しても壊れないように、
+%    \cs{oval}を常に横組ボックスの中で呼び出すようにした}
 %    \begin{macrocode}
 %% screen environment
 \newdimen\@scw
@@ -473,7 +473,7 @@ Q   \yoko
 %    \end{macrocode}
 %
 % \begin{environment}{screen}
-% |screen| $B4D6-$rDj5A$7$^$9!#(B
+% |screen| 環境を定義します。
 %    \begin{macrocode}
 \def\screen{%
 Q \@saveybaselineshift\ybaselineshift \ybaselineshift\z@
@@ -510,7 +510,7 @@ Q   \ybaselineshift\@saveybaselineshift \tbaselineshift\@savetbaselineshift
 %    \end{macrocode}
 % \end{environment}
 %
-% |itembox| $B4D6-$J$I$G;H$&L?Na$N=`Hw$G$9!#(B
+% |itembox| 環境などで使う命令の準備です。
 %    \begin{macrocode}
 %% itembox environment
 %%   replace \box0 with \@iboxstr; thanks FTEXers (1998/11/27)
@@ -522,7 +522,7 @@ Q   \ybaselineshift\@saveybaselineshift \tbaselineshift\@savetbaselineshift
 %    \end{macrocode}
 %
 % \begin{environment}{itembox}
-% |itembox| $B4D6-$rDj5A$7$^$9!#(B
+% |itembox| 環境を定義します。
 %    \begin{macrocode}
 \def\itembox{\@ifnextchar[{\@itembox}{\@itembox[c]}}
 \def\@itembox[#1]#2{%
@@ -559,7 +559,7 @@ Q \tbaselineshift\@savetbaselineshift% (KN:1998/02/27)
 %
 % \begin{macro}{\keytop}
 % \begin{macro}{\@keytop}
-% |\keytop| $BL?Na$G$9!#(B
+% |\keytop| 命令です。
 %    \begin{macrocode}
 %% \keytop
 \def\keytop{\@ifnextchar[{\@keytop}{\@keytop[d]}}
@@ -587,7 +587,7 @@ Q \iftdir\tate\else\yoko\fi
 % \begin{macro}{\yen}
 % \changes{1996/03/13}{v1.1}{Append \cs{leavevmode} in
 %     \cs{yen}, \cs{return}, \cs{Return} command.}
-% $B1_5-9f$G$9!#(B
+% 円記号です。
 %    \begin{macrocode}
 %% \yen
 \def\yen{\leavevmode\hbox{%
@@ -600,14 +600,14 @@ Q \iftdir\yoko\fi
 %
 % \begin{macro}{\return}
 % \begin{macro}{\Return}
-% $B2~9T5-9f$G$9!#(B|\return|$B$d(B|\Return|$B$H$$$&L>>N$O$"$j$U$l$F$$$k$N$G!"(B
-% ascmac$B%Q%C%1!<%8$NDj5A$,JL$N%Q%C%1!<%8$H>WFM$9$k>l9g$,$"$j$^$9(B
-% $B!JNc!'(Balgorithm2e$B%Q%C%1!<%8!K!#(B
-% $B$=$3$G!"(B|\Return|$B$H$$$&L?Na$,4{$KDj5A$5$l$F$$$F!"$+$D(Bascgrp$B%U%)%s%H$,(B
-% $BIT;HMQ$HH=CG$5$l$k>l9g$O%(%i!<$r=P$7$^$9!#K\Mh$J$i$P(B|\return|$B$bF1MM$K(B
-% $B%A%'%C%/$7$?$$$N$G$9$,!"!V(Bokumacro$B%Q%C%1!<%8$N8e$K(Bascmac$B%Q%C%1!<%8$r(B
-% $BFI$_9~$`$H!"%(%i!<$J$7$K(Bascmac$B%Q%C%1!<%8$NDj5A$,>!$D!W$H$$$&=>Mh$N5sF0(B
-% $B$r0];}$9$k$?$a!"8=;~E@$G$O%A%'%C%/$7$^$;$s!#(B
+% 改行記号です。|\return|や|\Return|という名称はありふれているので、
+% ascmacパッケージの定義が別のパッケージと衝突する場合があります
+% （例：algorithm2eパッケージ）。
+% そこで、|\Return|という命令が既に定義されていて、かつascgrpフォントが
+% 不使用と判断される場合はエラーを出します。本来ならば|\return|も同様に
+% チェックしたいのですが、「okumacroパッケージの後にascmacパッケージを
+% 読み込むと、エラーなしにascmacパッケージの定義が勝つ」という従来の挙動
+% を維持するため、現時点ではチェックしません。
 %    \begin{macrocode}
 %% return-key
 \begingroup
@@ -626,7 +626,7 @@ Q \iftdir\yoko\fi
 \endgroup
 %    \end{macrocode}
 %
-% $B2~9T5-9f$NDj5A$NK\BN$G$9!#(B
+% 改行記号の定義の本体です。
 %    \begin{macrocode}
 \def\return{\leavevmode\hbox{%
 Q \iftdir\yoko\fi
@@ -639,7 +639,7 @@ Q \iftdir\yoko\fi
 % \end{macro}
 % \end{macro}
 %
-% |\mask| $BL?Na$N=`Hw$G$9!#(B
+% |\mask| 命令の準備です。
 %    \begin{macrocode}
 %% \mask
 \newbox\@bwsp \newbox\@@bwsp\newcount\@bcal
@@ -650,7 +650,7 @@ Q \iftdir\yoko\fi
 %    \end{macrocode}
 %
 % \begin{macro}{\mask}
-% |\mask| $BL?Na$rDj5A$7$^$9!#(B
+% |\mask| 命令を定義します。
 %    \begin{macrocode}
 \def\mask#1#2{{\setbox\@bwsp=\hbox{#1}%
   \setbox0=\hbox{%
@@ -668,7 +668,7 @@ Q \ybaselineshift\z@\tbaselineshift\z@
 %    \end{macrocode}
 % \end{macro}
 %
-% |\maskbox| $BL?Na$N=`Hw$G$9!#(B
+% |\maskbox| 命令の準備です。
 %    \begin{macrocode}
 %% \Maskbox{width}{height}{mask_char}{pos}{rule_wid}{body}
 %% \maskbox{width}{height}{mask_char}{pos}{body}
@@ -677,7 +677,7 @@ Q \ybaselineshift\z@\tbaselineshift\z@
 %
 % \begin{macro}{\Maskbox}
 % \begin{macro}{\maskbox}
-% |\maskbox| $BL?Na$H(B |\Maskbox| $BL?Na$rDj5A$7$^$9!#(B
+% |\maskbox| 命令と |\Maskbox| 命令を定義します。
 %    \begin{macrocode}
 \def\Maskbox#1#2#3#4#5#6{{%
   \setbox0=\hbox{%
@@ -700,14 +700,14 @@ Q \ybaselineshift\z@\tbaselineshift\z@
 % \end{macro}
 % \end{macro}
 %
-% |shadebox| $B4D6-$G;H$&L?Na$N=`Hw$G$9!#(B
+% |shadebox| 環境で使う命令の準備です。
 %    \begin{macrocode}
 %% shadebox environment
 \newdimen\shaderule\shaderule 5pt
 %    \end{macrocode}
 %
 % \begin{environment}{shadebox}
-% |shadebox| $B4D6-$rDj5A$7$^$9!#(B
+% |shadebox| 環境を定義します。
 %    \begin{macrocode}
 \def\shadebox{\par\vspace{.3\baselineskip}%
 Q \@saveybaselineshift\ybaselineshift\ybaselineshift\z@
@@ -734,8 +734,8 @@ Q   \ybaselineshift\@saveybaselineshift \tbaselineshift\@savetbaselineshift
 %    \end{macrocode}
 % \end{environment}
 %
-% $B%H%j%C%/$K;HMQ$7$?!V(BQ$B!W$H$$$&J8;z$N%+%F%4%j!<%3!<%I$r85$KLa$7$^$9!#(B
-% \changes{2016/08/21}{v2.0c}{pdf\LaTeX{}$B$J$I$r%5%]!<%H(B}
+% トリックに使用した「Q」という文字のカテゴリーコードを元に戻します。
+% \changes{2016/08/21}{v2.0c}{pdf\LaTeX{}などをサポート}
 %    \begin{macrocode}
 \catcode`\Q=\ascmac@q@catcode\relax
 %%

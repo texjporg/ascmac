@@ -2,7 +2,7 @@ STRIPTARGET = tascmac.sty
 DOCTARGET = ascmac
 PDFTARGET = $(addsuffix .pdf,$(DOCTARGET))
 DVITARGET = $(addsuffix .dvi,$(DOCTARGET))
-KANJI = -kanji=jis
+KANJI = -kanji=utf8
 FONTMAP = -f ipaex.map -f ptex-ipaex.map
 TEXMF = $(shell kpsewhich -var-value=TEXMFHOME)
 
@@ -14,9 +14,11 @@ ASCMAC = tascmac.sty ascmac.sty
 
 ASCMAC_SRC = ascmac.dtx
 
+# for generating files, we use pdflatex incidentally.
+# current packages contain ASCII characters only, safe enough
 tascmac.sty: $(ASCMAC_SRC)
 	rm -f $(ASCMAC)
-	platex $(KANJI) ascmac.ins
+	pdflatex ascmac.ins
 	rm ascmac.log
 
 ascmac.dvi: $(ASCMAC_SRC)
