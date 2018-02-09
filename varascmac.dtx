@@ -43,7 +43,8 @@
   [2018/02/07 v0.3 ascmac variant]
 %<*driver>
 \documentclass{jltxdoc}
-\usepackage{varascmac}
+\usepackage{amssymb}
+\usepackage[usedtou]{varascmac}
 \GetFileInfo{varascmac.dtx}
 \title{The \textsf{varascmac} package \fileversion}
 \author{Japanese \TeX\ Development Community}
@@ -61,9 +62,11 @@
 %
 % この\textsf{varascmac}パッケージは、
 % \textsf{ascmac}パッケージの変形版かつ追補版です。
-% 一部の機能を\pTeX{}の\verb+\dtou+プリミティブにより実装しています
-% が、これは動作に必須ではありません
-% （\textsf{graphics}パッケージで代替可能）。
+% 既定で\textsf{graphics}パッケージを読み込んで利用します。
+% ただし、\pLaTeX{}/\upLaTeX{}とdvipdfmxの組み合わせの場合は、
+% \verb+[usedtou]+オプションを指定することで
+% \textsf{graphics}不要にもできます
+% （\pTeX{}のプリミティブだけで同等の処理を実現可能のため）。
 %
 % \section{使いかた}
 %
@@ -86,44 +89,57 @@
 %
 % \subsection{その他の命令}
 %
-% \DescribeMacro{\asciirtriangle}
-% \DescribeMacro{\asciiltriangle}
-% \DescribeMacro{\asciittriangle}
-% \DescribeMacro{\asciibtriangle}
+% \DescribeMacro{\asciitriangleright}
+% \DescribeMacro{\asciitriangleleft}
+% \DescribeMacro{\asciitriangleup}
+% \DescribeMacro{\asciitriangledown}
 % 付属のascgrpフォントに含まれる{\return}記号などは、
 % オリジナル版の\textsf{ascmac}パッケージで提供されていましたが、
 % 三角形の記号はパッケージ化されていませんでしたので、追加します。
 % それぞれ
-% \asciirtriangle\asciiltriangle\asciittriangle\asciibtriangle
+% \asciitriangleright\asciitriangleleft
+% \asciitriangleup\asciitriangledown
 % となります。
+%
+% この機能は\textsf{amssymb}パッケージが提供する
+% $\blacktriangleright \blacktriangleleft
+%  \blacktriangle \blacktriangledown$
+% (|\blacktriangleright|, |\blacktriangleleft|,
+% |\blacktriangle|, |\blacktriangledown|)
+% に似ていますが、微妙に形状が違います。
+% また、\textsf{varascmac}パッケージのものは数式モードで
+% なくても利用できます。
 %
 % \StopEventually{}
 %
 % \section{コード}
 %
+% 本パッケージはオリジナルの\textsf{ascmac}パッケージの追補版
+% なので、これを先に読み込みます。
 %    \begin{macrocode}
 %<*varascmac>
 \RequirePackage{ascmac}
 %    \end{macrocode}
 %
-% \begin{macro}{\asciirtriangle}
-% \begin{macro}{\asciiltriangle}
-% \begin{macro}{\asciittriangle}
-% \begin{macro}{\asciibtriangle}
+% \begin{macro}{\asciitriangleright}
+% \begin{macro}{\asciitriangleleft}
+% \begin{macro}{\asciitriangleup}
+% \begin{macro}{\asciitriangledown}
+% 三角形です。
 %    \begin{macrocode}
 %%
 %% Triangles using ascgrp font
-\newcommand{\asciirtriangle}{{\@ascgrp 0}}
-\newcommand{\asciiltriangle}{{\@ascgrp 1}}
-\newcommand{\asciittriangle}{{\@ascgrp 2}}
-\newcommand{\asciibtriangle}{{\@ascgrp 3}}
+\newcommand{\asciitriangleright}{{\@ascgrp 0}}
+\newcommand{\asciitriangleleft}{{\@ascgrp 1}}
+\newcommand{\asciitriangleup}{{\@ascgrp 2}}
+\newcommand{\asciitriangledown}{{\@ascgrp 3}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
 %
-% パッケージオプションを定義します。
+% パッケージオプションを定義し、ユーザ指定に従い実行します。
 % |usedtou| というオプションが利用可能です。（何をするのかは
 % この後の |varboxnote| 環境の実装部分の説明を参照。）
 %    \begin{macrocode}
@@ -134,6 +150,8 @@
 %%
 %    \end{macrocode}
 %
+% |usedtou| オプションは\pTeX{}/\upTeX{}以外では利用不可のため、
+% 警告を出してデフォルトにフォールバックします。
 %    \begin{macrocode}
 %% On pdfLaTeX etc, `usedtou' falls back to graphics rotation
 \if 1\vascmac@status
