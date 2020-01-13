@@ -1,7 +1,7 @@
 % \iffalse meta-comment
 %
 %  Copyright (c) 2010 ASCII MEDIA WORKS
-%  Copyright (c) 2016-2018 Japanese TeX Development Community
+%  Copyright (c) 2016-2020 Japanese TeX Development Community
 %
 %  This file is part of ascmac community edition.
 %  -------------------------------------------------------------
@@ -11,6 +11,8 @@
 %
 % \iffalse
 %
+% 2020/01/13 v2.0i
+%     - Fix a bug: latex in DVI mode of pdfTeX did not work.
 % 2018/03/09 v2.0h
 %     - Moved to new GitHub repository:
 %       https://github.com/texjporg/ascmac
@@ -74,7 +76,7 @@
 %</driver>
 %<tascmac>\ProvidesPackage{tascmac}
 %<ascmac>\ProvidesPackage{ascmac}
-  [2018/03/09 v2.0h
+  [2020/01/13 v2.0i
 %<driver|tascmac>  ascmac package (community edition)
 %<ascmac>  ascmac wrapper (community edition)
   ]
@@ -347,16 +349,18 @@
 %    \begin{macrocode}
 %%
 %% Use Type1 font for ascgrp (pdfLaTeX, LuaLaTeX)
-\ifascmac@ptex\else
-  \ifx\pdfextension\@undefined
-    \ifx\pdfmapline\@undefined\else
-      % pdfTeX, LuaTeX (<=0.81)
+\ifx\pdfextension\@undefined
+  \ifx\pdfmapline\@undefined\else
+    % pdfTeX, LuaTeX (<=0.81)
+    \ifnum\pdfoutput>\z@\relax
       \pdfmapline{+ascgrp <ascgrp.pfb}
       \pdfmapline{+ascii10 <ascii10.pfb}
       \pdfmapline{+ascii36 <ascii36.pfb}
     \fi
-  \else
-    % LuaTeX (>=0.85)
+  \fi
+\else
+  % LuaTeX (>=0.85)
+  \ifnum\outputmode>\z@\relax
     \pdfextension mapline{+ascgrp <ascgrp.pfb}
     \pdfextension mapline{+ascii10 <ascii10.pfb}
     \pdfextension mapline{+ascii36 <ascii36.pfb}

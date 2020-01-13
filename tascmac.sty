@@ -23,7 +23,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{tascmac}
-  [2018/03/09 v2.0h
+  [2020/01/13 v2.0i
   ascmac package (community edition)
   ]
 %%
@@ -51,16 +51,18 @@
 \fi
 %%
 %% Use Type1 font for ascgrp (pdfLaTeX, LuaLaTeX)
-\ifascmac@ptex\else
-  \ifx\pdfextension\@undefined
-    \ifx\pdfmapline\@undefined\else
-      % pdfTeX, LuaTeX (<=0.81)
+\ifx\pdfextension\@undefined
+  \ifx\pdfmapline\@undefined\else
+    % pdfTeX, LuaTeX (<=0.81)
+    \ifnum\pdfoutput>\z@\relax
       \pdfmapline{+ascgrp <ascgrp.pfb}
       \pdfmapline{+ascii10 <ascii10.pfb}
       \pdfmapline{+ascii36 <ascii36.pfb}
     \fi
-  \else
-    % LuaTeX (>=0.85)
+  \fi
+\else
+  % LuaTeX (>=0.85)
+  \ifnum\outputmode>\z@\relax
     \pdfextension mapline{+ascgrp <ascgrp.pfb}
     \pdfextension mapline{+ascii10 <ascii10.pfb}
     \pdfextension mapline{+ascii36 <ascii36.pfb}
