@@ -11,6 +11,10 @@
 %
 % \iffalse
 %
+% 2020/01/15 v2.1
+%     - Use an external map file for supporting dvips.
+% 2020/01/14 v2.0j
+%     - Fix a bug introduced in v2.0i for XeLaTeX.
 % 2020/01/13 v2.0i
 %     - Fix a bug: latex in DVI mode of pdfTeX did not work.
 % 2018/03/09 v2.0h
@@ -76,7 +80,7 @@
 %</driver>
 %<tascmac>\ProvidesPackage{tascmac}
 %<ascmac>\ProvidesPackage{ascmac}
-  [2020/01/14 v2.0j
+  [2020/01/15 v2.1
 %<driver|tascmac>  ascmac package (community edition)
 %<ascmac>  ascmac wrapper (community edition)
   ]
@@ -346,29 +350,32 @@
 % \changes{2016/08/21}{v2.0c}{pdf\LaTeX{}でascgrpのType1フォントを使用}
 % \changes{2017/12/06}{v2.0e}{念のためe-拡張なしのエンジンでのエラーを防止}
 % \changes{2017/12/17}{v2.0f}{判定が逆になっていたのを修正}
+% \changes{2020/01/13}{v2.0i}{\LaTeX{}のDVIモードをサポート}
+% \changes{2020/01/14}{v2.0j}{v2.0iの変更でXeLaTeXでエラーが出たのを修正}
+% \changes{2020/01/15}{v2.1}{dvipsもサポートするため、外部マップファイルに分離}
 %    \begin{macrocode}
 %%
-%% Use Type1 font for ascgrp (pdfLaTeX, LuaLaTeX)
-\ifx\pdfextension\@undefined
-  \ifx\pdfmapline\@undefined\else
-    % pdfTeX, LuaTeX (<=0.81)
-    % [memo] XeTeX does not have \pdfmapline, but xelatex.ini defines it.
-    % Here we ignore it by checking the existence of \pdfoutput,
-    % as [x]dvipdfmx can add the similar effect implicitly.
-    \ifx\pdfoutput\@undefined\else\ifnum\pdfoutput>\z@\relax
-      \pdfmapline{+ascgrp <ascgrp.pfb}
-      \pdfmapline{+ascii10 <ascii10.pfb}
-      \pdfmapline{+ascii36 <ascii36.pfb}
-    \fi\fi
-  \fi
-\else
-  % LuaTeX (>=0.85)
-  \ifnum\outputmode>\z@\relax
-    \pdfextension mapline{+ascgrp <ascgrp.pfb}
-    \pdfextension mapline{+ascii10 <ascii10.pfb}
-    \pdfextension mapline{+ascii36 <ascii36.pfb}
-  \fi
-\fi
+%% Use Type1 font for ascgrp: moved to an external map file
+%\ifx\pdfextension\@undefined
+%  \ifx\pdfmapline\@undefined\else
+%    % pdfTeX, LuaTeX (<=0.81)
+%    % [memo] XeTeX does not have \pdfmapline, but xelatex.ini defines it.
+%    % Here we ignore it by checking the existence of \pdfoutput,
+%    % as [x]dvipdfmx can add the similar effect implicitly.
+%    \ifx\pdfoutput\@undefined\else\ifnum\pdfoutput>\z@\relax
+%      \pdfmapline{+ascgrp <ascgrp.pfb}
+%      \pdfmapline{+ascii10 <ascii10.pfb}
+%      \pdfmapline{+ascii36 <ascii36.pfb}
+%    \fi\fi
+%  \fi
+%\else
+%  % LuaTeX (>=0.85)
+%  \ifnum\outputmode>\z@\relax
+%    \pdfextension mapline{+ascgrp <ascgrp.pfb}
+%    \pdfextension mapline{+ascii10 <ascii10.pfb}
+%    \pdfextension mapline{+ascii36 <ascii36.pfb}
+%  \fi
+%\fi
 %    \end{macrocode}
 %
 % \begin{macro}{\@savetbaselineshift}
