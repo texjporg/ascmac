@@ -345,8 +345,14 @@
 \fi
 %    \end{macrocode}
 %
-% pdf\LaTeX{}やLua\LaTeX{}のプリミティブを使って、ascgrpのType1フォントを
-% 使用できるように設定します。
+% 以前の版ではascgrpのType1フォントを設定するために
+% pdf\LaTeX{}やLua\LaTeX{}のプリミティブを使用していましたが、
+% v2.1ではマップファイル(ascmac.map)を用意しました。
+% このmapファイルを\verb+$TEXMF/fonts/map/dvips/ascmac/+にインストールして
+%\begin{verbatim}
+%   updmap-sys --enable MixedMap=ascmac.map
+%\end{verbatim}
+% を実行すれば有効になります。
 % \changes{2016/08/21}{v2.0c}{pdf\LaTeX{}でascgrpのType1フォントを使用}
 % \changes{2017/12/06}{v2.0e}{念のためe-拡張なしのエンジンでのエラーを防止}
 % \changes{2017/12/17}{v2.0f}{判定が逆になっていたのを修正}
