@@ -23,7 +23,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{tascmac}
-  [2020/01/13 v2.0i
+  [2020/01/14 v2.0j
   ascmac package (community edition)
   ]
 %%
@@ -54,11 +54,14 @@
 \ifx\pdfextension\@undefined
   \ifx\pdfmapline\@undefined\else
     % pdfTeX, LuaTeX (<=0.81)
-    \ifnum\pdfoutput>\z@\relax
+    % [memo] XeTeX does not have \pdfmapline, but xelatex.ini defines it.
+    % Here we ignore it by checking the existence of \pdfoutput,
+    % as [x]dvipdfmx can add the similar effect implicitly.
+    \ifx\pdfoutput\@undefined\else\ifnum\pdfoutput>\z@\relax
       \pdfmapline{+ascgrp <ascgrp.pfb}
       \pdfmapline{+ascii10 <ascii10.pfb}
       \pdfmapline{+ascii36 <ascii36.pfb}
-    \fi
+    \fi\fi
   \fi
 \else
   % LuaTeX (>=0.85)
