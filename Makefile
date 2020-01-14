@@ -38,6 +38,8 @@ install:
 	cp ./*.pdf ${TEXMF}/doc/latex/ascmac/
 	mkdir -p ${TEXMF}/fonts/source/public/ascmac
 	cp ./*.mf ${TEXMF}/fonts/source/public/ascmac/
+	mkdir -p ${TEXMF}/fonts/map/dvips/ascmac
+	cp ./*.map ${TEXMF}/fonts/map/dvips/ascmac/
 	mkdir -p ${TEXMF}/fonts/type1/public/ascmac
 	cp ./*.pfb ${TEXMF}/fonts/type1/public/ascmac/
 	mkdir -p ${TEXMF}/fonts/tfm/public/ascmac

@@ -26,6 +26,9 @@ mv $TMP/$PROJECT/*.pdf $TMP/$PROJECT/doc/latex/ascmac/
 mkdir -p $TMP/$PROJECT/fonts/source/public/$PROJECT
 mv $TMP/$PROJECT/*.mf $TMP/$PROJECT/fonts/source/public/$PROJECT/
 
+mkdir -p $TMP/$PROJECT/fonts/map/dvips/$PROJECT
+mv $TMP/$PROJECT/*.map $TMP/$PROJECT/fonts/map/dvips/$PROJECT/
+
 mkdir -p $TMP/$PROJECT/fonts/type1/public/$PROJECT
 mv $TMP/$PROJECT/*.pfb $TMP/$PROJECT/fonts/type1/public/$PROJECT/
 
