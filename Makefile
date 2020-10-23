@@ -1,5 +1,5 @@
 STRIPTARGET = tascmac.sty
-DOCTARGET = ascmac
+DOCTARGET = ascmac varascmac
 PDFTARGET = $(addsuffix .pdf,$(DOCTARGET))
 DVITARGET = $(addsuffix .dvi,$(DOCTARGET))
 KANJI = -kanji=utf8
@@ -10,9 +10,9 @@ default: $(STRIPTARGET) $(DVITARGET)
 strip: $(STRIPTARGET)
 all: $(STRIPTARGET) $(PDFTARGET)
 
-ASCMAC = tascmac.sty ascmac.sty
+ASCMAC = tascmac.sty ascmac.sty varascmac.sty
 
-ASCMAC_SRC = ascmac.dtx
+ASCMAC_SRC = ascmac.dtx varascmac.dtx
 
 # for generating files, we use pdflatex incidentally.
 # current packages contain ASCII characters only, safe enough
@@ -21,13 +21,12 @@ tascmac.sty: $(ASCMAC_SRC)
 	pdflatex ascmac.ins
 	rm ascmac.log
 
-ascmac.dvi: $(ASCMAC_SRC)
-	rm -f platex.cfg
-	platex $(KANJI) ascmac.dtx
-	platex $(KANJI) ascmac.dtx
-	rm ascmac.aux ascmac.log ascmac.toc
-
-ascmac.pdf: ascmac.dvi
+.SUFFIXES: .dtx .dvi .pdf
+.dtx.dvi:
+	platex $(KANJI) $<
+	platex $(KANJI) $<
+	rm -f *.aux *.log *.toc
+.dvi.pdf:
 	dvipdfmx $(FONTMAP) $<
 
 .PHONY: install clean cleanstrip cleanall cleandoc

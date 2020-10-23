@@ -1,0 +1,302 @@
+% \iffalse meta-comment
+%
+%  Copyright (c) 2018 Japanese TeX Development Community
+%
+%  This file is part of ascmac community edition.
+%  -------------------------------------------------------------
+%
+% \fi
+%
+%
+% \iffalse
+%
+% 2018/02/07 v0.3 (HY)
+%     - First public version.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\def\eTeX{$\varepsilon$-\pTeX}
+\def\pTeX{p\kern-.15em\TeX}
+\def\upTeX{u\pTeX}
+\def\epTeX{$\varepsilon$-\pTeX}
+\def\eupTeX{$\varepsilon$-\upTeX}
+\def\pLaTeX{p\kern-.05em\LaTeX}
+\def\pLaTeXe{p\kern-.05em\LaTeXe}
+\def\upLaTeX{u\pLaTeX}
+\def\upLaTeXe{u\pLaTeXe}
+%</driver>
+% \fi
+%
+% \iffalse
+%<*varascmac>
+%% varascmac.sty
+%% written by Hironobu Yamashita (@aminophen)
+%</varascmac>
+%<varascmac>\NeedsTeXFormat{LaTeX2e}
+%<*driver>
+\NeedsTeXFormat{pLaTeX2e}
+\ProvidesFile{varascmac.dtx}
+%</driver>
+%<varascmac>\ProvidesPackage{varascmac}
+  [2018/02/07 v0.3 ascmac variant]
+%<*driver>
+\documentclass{jltxdoc}
+\usepackage{amssymb}
+\usepackage[usedtou]{varascmac}
+\GetFileInfo{varascmac.dtx}
+\title{The \textsf{varascmac} package \fileversion}
+\author{Japanese \TeX\ Development Community}
+\date{作成日：\filedate}
+\begin{document}
+  \maketitle
+  \DocInput{\filename}
+\end{document}
+%</driver>
+% \fi
+%
+% \tableofcontents
+%
+% \section{はじめに}
+%
+% この\textsf{varascmac}パッケージは、
+% \textsf{ascmac}パッケージの変形版かつ追補版です。
+% 既定で\textsf{graphics}パッケージを読み込んで利用します。
+% ただし、\pLaTeX{}/\upLaTeX{}とdvipdfmxの組み合わせの場合は、
+% \verb+[usedtou]+オプションを指定することで
+% \textsf{graphics}不要にもできます
+% （\pTeX{}のプリミティブだけで同等の処理を実現可能のため）。
+%
+% \section{使いかた}
+%
+% \subsection{環境型の命令}
+%
+% \DescribeEnv{varboxnote}
+% オリジナルの |boxnote| 環境の変形版である
+% |varboxnote| 環境を作りました。
+%
+% \begin{minipage}{.45\linewidth}\begin{boxnote}
+% オリジナルの |boxnote| 環境です。
+% ノートを破ったような線は、横組では「上」に、
+% 縦組では「右」に現れます。
+% \end{boxnote}\end{minipage}\hfill
+% \begin{minipage}{.45\linewidth}\begin{varboxnote}
+% 新しい |varboxnote| 環境です。
+% ノートを破ったような線は、横組では「左」に、
+% 縦組では「上」に現れます。
+% \end{varboxnote}\end{minipage}
+%
+% \subsection{その他の命令}
+%
+% \DescribeMacro{\asciitriangleright}
+% \DescribeMacro{\asciitriangleleft}
+% \DescribeMacro{\asciitriangleup}
+% \DescribeMacro{\asciitriangledown}
+% 付属のascgrpフォントに含まれる{\return}記号などは、
+% オリジナル版の\textsf{ascmac}パッケージで提供されていましたが、
+% 三角形の記号はパッケージ化されていませんでしたので、追加します。
+% それぞれ
+% \asciitriangleright\asciitriangleleft
+% \asciitriangleup\asciitriangledown
+% となります。
+%
+% この機能は\textsf{amssymb}パッケージが提供する
+% $\blacktriangleright \blacktriangleleft
+%  \blacktriangle \blacktriangledown$
+% (|\blacktriangleright|, |\blacktriangleleft|,
+% |\blacktriangle|, |\blacktriangledown|)
+% に似ていますが、微妙に形状が違います。
+% また、\textsf{varascmac}パッケージのものは数式モードで
+% なくても利用できます。
+%
+% \StopEventually{}
+%
+% \section{コード}
+%
+% 本パッケージはオリジナルの\textsf{ascmac}パッケージの追補版
+% なので、これを先に読み込みます。
+%    \begin{macrocode}
+%<*varascmac>
+\RequirePackage{ascmac}
+%    \end{macrocode}
+%
+% \begin{macro}{\asciitriangleright}
+% \begin{macro}{\asciitriangleleft}
+% \begin{macro}{\asciitriangleup}
+% \begin{macro}{\asciitriangledown}
+% 三角形です。
+%    \begin{macrocode}
+%%
+%% Triangles using ascgrp font
+\newcommand{\asciitriangleright}{{\@ascgrp 0}}
+\newcommand{\asciitriangleleft}{{\@ascgrp 1}}
+\newcommand{\asciitriangleup}{{\@ascgrp 2}}
+\newcommand{\asciitriangledown}{{\@ascgrp 3}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% パッケージオプションを定義し、ユーザ指定に従い実行します。
+% |usedtou| というオプションが利用可能です。（何をするのかは
+% この後の |varboxnote| 環境の実装部分の説明を参照。）
+%    \begin{macrocode}
+%%
+\def\vascmac@status{0}
+\DeclareOption{usedtou}{\def\vascmac@status{1}}
+\ProcessOptions\relax
+%%
+%    \end{macrocode}
+%
+% |usedtou| オプションは\pTeX{}/\upTeX{}以外では利用不可のため、
+% 警告を出してデフォルトにフォールバックします。
+%    \begin{macrocode}
+%% On pdfLaTeX etc, `usedtou' falls back to graphics rotation
+\if 1\vascmac@status
+  \ifascmac@ptex\else
+    \PackageWarning{varascmac}{%
+      Option `usedtou' requires pLaTeX, upLaTeX\MessageBreak
+      or LuaLaTeX with LuaTeX-ja support!\MessageBreak
+      I'm going to ignore it ...}
+    \def\vascmac@status{0}
+  \fi
+\fi
+%%
+%    \end{macrocode}
+%
+% (u)p\LaTeXe{}以外をサポートするためのトリックです。
+% 「Q」という文字のカテゴリーコードをこのパッケージを読んでいる間だけ
+% 変更し、(u)p\LaTeXe{}では無視する文字に、それ以外では
+% コメント文字（|%|と同じ）にします。
+% ただし、依存パッケージ（ここでは\textsf{graphics}）は
+% その前に読み込まなければなりません。
+%    \begin{macrocode}
+%% Required package should be loaded before \catcode trick
+\if 0\vascmac@status
+  \RequirePackage{graphics}
+\fi
+%%
+\chardef\ascmac@q@catcode=\catcode`\Q\relax
+\ifascmac@ptex
+  \catcode`\Q=9\relax
+\else
+  \catcode`\Q=14\relax
+\fi
+%%
+%    \end{macrocode}
+%
+% ここからは(u)\pTeX{}以外の場合、あるいは
+% \verb+usedtou+オプションが無効な場合のコードです。
+%    \begin{macrocode}
+\if 0\vascmac@status
+%    \end{macrocode}
+%
+% \begin{environment}{varboxnote}
+% |varboxnote| 環境を、|\rotatebox| マクロを使用して定義します。
+%    \begin{macrocode}
+%% Common implementation: requires graphics package
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\varboxnote{\par\vspace{.3\baselineskip}%
+Q \@saveybaselineshift\ybaselineshift\ybaselineshift\z@
+Q \@savetbaselineshift\tbaselineshift\tbaselineshift\z@
+  \@bw=\linewidth \advance\@bw-42.16pt
+  \setbox\@nbody=\hbox\bgroup\begin{minipage}{\@bw}% (KN:1998/02/27)
+Q   \ybaselineshift\@saveybaselineshift \tbaselineshift\@savetbaselineshift
+}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\endvarboxnote{\end{minipage}\egroup
+  \@tempdima=\ht\@nbody
+  \advance\@tempdima\dp\@nbody \advance\@tempdima40pt
+  \setbox\@nbox=\hbox{\@ascgrp b\hss a\hss b}%
+  \@whiledim \wd\@nbox<\@tempdima \do{%
+    \setbox\@nbox=\hbox{\@ascgrp\unhbox\@nbox \hss a\hss b}}%
+  \setbox\@nbox=\hb@xt@\@tempdima{\@ascgrp\unhbox\@nbox \hss a\hss b}%
+  \vbox{\parindent\z@\offinterlineskip
+  \hrule\@height1.08pt
+  \hb@xt@\hsize{\rotatebox{90}{\raise\dp\@nbox\box\@nbox}\hfil\vbox{\vskip20pt
+  \box\@nbody\vskip20pt}\hfil\vrule\@width1.08pt}%
+  \hrule\@height1.08pt}}
+%%
+%    \end{macrocode}
+% \end{environment}
+%
+% トリックに使用した「Q」という文字のカテゴリーコードを元に戻して
+% 読込を終了します。
+%    \begin{macrocode}
+\catcode`\Q=\ascmac@q@catcode\relax
+\expandafter\endinput
+\fi
+%%
+%    \end{macrocode}
+%
+% ここからは(u)\pTeX{}専用、かつ\verb+usedtou+オプションが
+% 有効な場合のコードです。
+% \pTeX{}の場合、\textsf{graphics}パッケージに頼らなくても、
+% |varboxnote|環境の描画を実現することができます。
+% 具体的には、組方向変更プリミティブである |\dtou| や
+% |\yoko| を使用します。
+% ただし、|\dtou| 組方向をサポートしているDVIドライバ
+% は少なく\footnote{\TeX\ Live 2017時点では、dvipdfmxしか
+% 知られていません。dvipsも\cs{dtou}をサポートしていません。}、
+% \pLaTeX{}や\upLaTeX{}で作成したDVIをdvipdfmxで処理しなければ
+% ならないという制約が生じるため、
+% 隠しオプションのような扱いにしておきます。
+%
+%    \begin{macrocode}
+\if 1\vascmac@status
+%    \end{macrocode}
+%
+% \begin{environment}{varboxnote}
+% |varboxnote| 環境を、|\dtou| プリミティブを使用して定義します。
+%    \begin{macrocode}
+%% Another implementation: uses \iftdir, \yoko and \dtou
+\def\asc@dtou@dir{\iftdir\yoko\else\dtou\fi}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\varboxnote{\par\vspace{.3\baselineskip}%
+  \@saveybaselineshift\ybaselineshift\ybaselineshift\z@
+  \@savetbaselineshift\tbaselineshift\tbaselineshift\z@
+  \@bw=\linewidth \advance\@bw-42.16pt
+  \setbox\@nbody=\hbox\bgroup\begin{minipage}{\@bw}% (KN:1998/02/27)
+    \ybaselineshift\@saveybaselineshift \tbaselineshift\@savetbaselineshift
+}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\endvarboxnote{\end{minipage}\egroup
+  \@tempdima=\ht\@nbody \advance\@tempdima20pt
+  \iftdir\else \advance\@tempdima\dp\@nbody \advance\@tempdima20pt \fi
+  \setbox\@nbox=\hbox{\asc@dtou@dir\@ascgrp b\hss a\hss b}%
+  \@whiledim \ht\@nbox<\@tempdima \do{%
+    \setbox\@nbox=\hbox{\asc@dtou@dir\@ascgrp\unhbox\@nbox \hss a\hss b}}%
+  \iftdir \advance\@tempdima\dp\@nbody \advance\@tempdima20pt \fi
+  \setbox\@nbox=\hb@xt@\@tempdima{\asc@dtou@dir\@ascgrp\unhbox\@nbox \hss a\hss b}%
+  \vbox{\parindent\z@\offinterlineskip
+  \hrule\@height1.08pt
+  \hb@xt@\hsize{\raise\dp\@nbox\box\@nbox\hfil\vbox{\vskip20pt
+  \box\@nbody\vskip20pt}\hfil\vrule\@width1.08pt}%
+  \hrule\@height1.08pt}}
+%%
+%    \end{macrocode}
+% \end{environment}
+%
+% トリックに使用した「Q」という文字のカテゴリーコードを元に戻して
+% 読込を終了します。
+%    \begin{macrocode}
+\catcode`\Q=\ascmac@q@catcode\relax
+\expandafter\endinput
+\fi
+%%
+%</varascmac>
+%    \end{macrocode}
+%
+% \Finale
+%
+\endinput
