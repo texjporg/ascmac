@@ -1,7 +1,7 @@
 % \iffalse meta-comment
 %
 %  Copyright (c) 2010 ASCII MEDIA WORKS
-%  Copyright (c) 2016-2020 Japanese TeX Development Community
+%  Copyright (c) 2016-2022 Japanese TeX Development Community
 %
 %  This file is part of ascmac community edition.
 %  -------------------------------------------------------------
@@ -85,7 +85,8 @@
 %<ascmac>  ascmac wrapper (community edition)
   ]
 %<*driver>
-\documentclass{jltxdoc}
+\RequirePackage{plautopatch}
+\documentclass[dvipdfmx,a4paper]{jltxdoc}
 \usepackage{ascmac}
 \GetFileInfo{ascmac.dtx}
 \title{The \textsf{ascmac} package \fileversion}

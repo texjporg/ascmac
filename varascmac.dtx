@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-%  Copyright (c) 2018 Japanese TeX Development Community
+%  Copyright (c) 2018-2022 Japanese TeX Development Community
 %
 %  This file is part of ascmac community edition.
 %  -------------------------------------------------------------
@@ -42,7 +42,8 @@
 %<varascmac>\ProvidesPackage{varascmac}
   [2018/02/07 v0.3 ascmac variant]
 %<*driver>
-\documentclass{jltxdoc}
+\RequirePackage{plautopatch}
+\documentclass[dvipdfmx,a4paper]{jltxdoc}
 \usepackage{amssymb}
 \usepackage[usedtou]{varascmac}
 \GetFileInfo{varascmac.dtx}
